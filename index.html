@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sepercik Firman</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2740;
+    --navy-deep:#121B30;
+    --paper:#FBF6EC;
+    --paper-dim:#F2EBDC;
+    --ink:#2A2A28;
+    --ink-soft:#6B6558;
+    --gold:#C9974C;
+    --gold-soft:#E4C793;
+    --sage:#6E8B74;
+    --dusk:#5C7A99;
+    --line:#E5DCC6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  html,body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--navy);
+    overflow:hidden;
+    padding:64px 0 88px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-40%;
+    left:50%;
+    width:900px;
+    height:900px;
+    transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(201,151,76,0.35) 0%, rgba(201,151,76,0.08) 40%, rgba(27,39,64,0) 70%);
+    animation:glow 12s ease-in-out infinite;
+  }
+  @keyframes glow{
+    0%,100%{opacity:0.6; transform:translateX(-50%) translateY(0);}
+    50%{opacity:1; transform:translateX(-50%) translateY(30px);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero::before{animation:none;}
+  }
+  .hero-inner{position:relative; z-index:1; text-align:center;}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--paper);
+    font-size:clamp(28px,5vw,46px);
+    line-height:1.25;
+    margin:0 0 18px;
+    max-width:680px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .hero p{
+    color:#C7CEDD;
+    font-size:15px;
+    max-width:480px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+
+  /* ---------- DAILY VERSE ---------- */
+  .daily-section{margin-top:-40px; position:relative; z-index:2;}
+  .daily-card{
+    background:linear-gradient(135deg, var(--navy-deep), var(--navy));
+    border-radius:16px;
+    padding:28px 30px 24px;
+    box-shadow:0 14px 34px rgba(18,27,48,0.28);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+  }
+  .daily-card::before{
+    content:"✦";
+    position:absolute;
+    top:-10px; right:6px;
+    font-size:110px;
+    color:rgba(228,199,147,0.08);
+    line-height:1;
+  }
+  .daily-label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--gold-soft);
+    margin:0 0 14px;
+  }
+  .daily-label .dot{width:5px; height:5px; border-radius:50%; background:var(--gold-soft);}
+  .daily-tag{
+    display:inline-block;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:3px 9px;
+    border-radius:100px;
+    margin-bottom:12px;
+    color:#fff;
+    background:var(--gold);
+  }
+  .daily-card h3{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:20px;
+    margin:0 0 10px;
+    position:relative;
+  }
+  .daily-card .verse{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-size:14.5px;
+    color:var(--gold-soft);
+    margin:0 0 12px;
+    position:relative;
+  }
+  .daily-card .body-text{
+    font-size:14px;
+    line-height:1.7;
+    color:#DCE1EC;
+    margin:0 0 18px;
+    white-space:pre-wrap;
+    position:relative;
+  }
+  .daily-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-top:1px solid rgba(255,255,255,0.12);
+    padding-top:14px;
+    font-size:12.5px;
+    color:#A9B2C4;
+    position:relative;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .daily-footer .author{font-weight:600; color:var(--paper);}
+  .daily-actions{display:flex; gap:8px;}
+
+  /* ---------- FILTER TABS ---------- */
+  .tabs{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:-32px;
+    position:relative;
+    z-index:2;
+    padding:0 16px;
+  }
+  .tab{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:10px 20px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    box-shadow:0 4px 14px rgba(27,39,64,0.10);
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{color:var(--ink); transform:translateY(-1px);}
+  .tab.active{background:var(--navy); color:var(--paper); border-color:var(--navy);}
+
+  /* ---------- FEED ---------- */
+  .feed-section{padding:56px 0 120px;}
+  .feed-header{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .feed-header h2{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0;
+  }
+  .feed-count{font-size:13px; color:var(--ink-soft);}
+
+  .grid{
+    columns:2 320px;
+    column-gap:20px;
+  }
+  @media (max-width:640px){ .grid{columns:1;} }
+
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    border-radius:2px 10px 10px 2px;
+    padding:22px 22px 18px;
+    margin:0 0 20px;
+    break-inside:avoid;
+    position:relative;
+    box-shadow:0 1px 2px rgba(27,39,64,0.04);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card::after{
+    content:"";
+    position:absolute;
+    top:0; right:0;
+    width:0; height:0;
+    border-style:solid;
+    border-width:0 16px 16px 0;
+    border-color:transparent var(--paper-dim) transparent transparent;
+    filter:drop-shadow(-1px 1px 1px rgba(0,0,0,0.06));
+  }
+  .card:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(27,39,64,0.10);}
+  .card.cat-khotbah{border-left-color:var(--dusk);}
+  .card.cat-motivasi{border-left-color:var(--sage);}
+
+  .card-tag{
+    display:inline-block;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:3px 9px;
+    border-radius:100px;
+    margin-bottom:12px;
+    color:#fff;
+    background:var(--gold);
+  }
+  .card.cat-khotbah .card-tag{background:var(--dusk);}
+  .card.cat-motivasi .card-tag{background:var(--sage);}
+
+  .card h3{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 8px;
+    line-height:1.35;
+  }
+  .card .verse{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  .card .body-text{
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--ink);
+    margin:0 0 16px;
+    white-space:pre-wrap;
+  }
+  .card-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-top:1px dashed var(--line);
+    padding-top:12px;
+    font-size:12px;
+    color:var(--ink-soft);
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .card-footer .author{font-weight:600; color:var(--ink);}
+  .card-actions{display:flex; align-items:center; gap:6px;}
+  .amin-btn, .fav-btn, .share-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    background:none;
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:5px 11px;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .amin-btn:hover{border-color:var(--gold); color:var(--gold);}
+  .amin-btn.lit{background:var(--gold); color:#fff; border-color:var(--gold);}
+  .fav-btn:hover{border-color:var(--dusk); color:var(--dusk);}
+  .fav-btn.lit{background:var(--dusk); color:#fff; border-color:var(--dusk);}
+  .share-btn:hover{border-color:var(--sage); color:var(--sage);}
+  .fav-btn, .share-btn{padding:5px 9px;}
+
+  .empty{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+    padding:60px 20px;
+  }
+
+  /* ---------- FAB ---------- */
+  .fab{
+    position:fixed;
+    bottom:26px;
+    right:26px;
+    background:var(--navy);
+    color:var(--paper);
+    border:none;
+    border-radius:100px;
+    padding:15px 22px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    box-shadow:0 8px 24px rgba(27,39,64,0.35);
+    z-index:50;
+    transition:transform .15s ease;
+  }
+  .fab:hover{transform:translateY(-2px);}
+
+  /* ---------- MODAL ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(18,27,48,0.55);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 16px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--paper);
+    border-radius:14px;
+    max-width:480px;
+    width:100%;
+    padding:28px 26px 24px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    position:relative;
+  }
+  .modal h3{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:20px;
+    margin:0 0 4px;
+  }
+  .modal .sub{font-size:13px; color:var(--ink-soft); margin:0 0 20px;}
+  .close-btn{
+    position:absolute; top:18px; right:20px;
+    background:none; border:none;
+    font-size:20px; color:var(--ink-soft);
+    cursor:pointer; line-height:1;
+  }
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .field input, .field textarea, .field select{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    background:#fff;
+    color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:90px; font-family:'Inter',sans-serif;}
+  .cat-choices{display:flex; gap:8px;}
+  .cat-choice{
+    flex:1;
+    text-align:center;
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    padding:9px 6px;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+    color:var(--ink-soft);
+  }
+  .cat-choice.selected{border-color:var(--navy); background:var(--navy); color:#fff;}
+  .submit-btn{
+    width:100%;
+    background:var(--gold);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:13px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:6px;
+    transition:filter .15s ease;
+  }
+  .submit-btn:hover{filter:brightness(1.06);}
+  .submit-btn:disabled{opacity:0.5; cursor:not-allowed;}
+  .hint{font-size:11.5px; color:var(--ink-soft); margin-top:10px; text-align:center;}
+  .toast{
+    position:fixed;
+    bottom:26px; left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--navy);
+    color:var(--paper);
+    padding:12px 20px;
+    border-radius:100px;
+    font-size:13px;
+    font-weight:600;
+    opacity:0;
+    transition:all .25s ease;
+    z-index:200;
+    pointer-events:none;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- FOOTER ---------- */
+  .site-footer{
+    border-top:1px solid var(--line);
+    padding:22px 0 90px;
+  }
+  .footer-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .footer-inner a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-weight:600;
+    border-bottom:1px dashed var(--line);
+    padding-bottom:1px;
+  }
+  .footer-inner a:hover{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Sepercik Firman</p>
+    <h1>Satu ayat, satu renungan, satu dorongan kecil — cukup untuk menerangi harimu.</h1>
+    <p>Ruang berbagi firman, khotbah singkat, dan motivasi singkat dari siapa saja, untuk siapa saja.</p>
+  </div>
+</div>
+
+<div class="wrap daily-section" id="dailySection" style="display:none;">
+  <div class="daily-card">
+    <p class="daily-label"><span class="dot"></span>Ayat &amp; Renungan Hari Ini</p>
+    <span class="daily-tag" id="dailyTag"></span>
+    <h3 id="dailyTitle"></h3>
+    <p class="verse" id="dailyVerse" style="display:none;"></p>
+    <p class="body-text" id="dailyBody"></p>
+    <div class="daily-footer">
+      <span><span class="author" id="dailyAuthor"></span> · <span id="dailyTime"></span></span>
+      <div class="daily-actions">
+        <button class="fav-btn" id="dailyFavBtn">🔖 Simpan</button>
+        <button class="share-btn" id="dailyShareBtn">📋 Salin</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs" id="tabs">
+  <div class="tab active" data-cat="semua">Semua</div>
+  <div class="tab" data-cat="firman">Firman</div>
+  <div class="tab" data-cat="khotbah">Khotbah Singkat</div>
+  <div class="tab" data-cat="motivasi">Motivasi Singkat</div>
+  <div class="tab" data-cat="favorit">🔖 Favorit</div>
+</div>
+
+<div class="wrap feed-section">
+  <div class="feed-header">
+    <h2 id="feedTitle">Semua bagian</h2>
+    <span class="feed-count" id="feedCount"></span>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="emptyState" style="display:none;">Belum ada yang dibagikan di kategori ini. Jadilah yang pertama membagikannya.</div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>© <span id="footerYear"></span> Sepercik Firman</span>
+    <a href="profil.html">Tentang Pembuat</a>
+  </div>
+</footer>
+
+<button class="fab" id="openModalBtn">＋ Bagikan</button>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close-btn" id="closeModalBtn">×</button>
+    <h3>Bagikan renungan</h3>
+    <p class="sub">Tulisanmu akan langsung terlihat oleh semua orang yang membuka halaman ini.</p>
+    <form id="postForm">
+      <div class="field">
+        <label>Kategori</label>
+        <div class="cat-choices" id="catChoices">
+          <div class="cat-choice selected" data-cat="firman">Firman</div>
+          <div class="cat-choice" data-cat="khotbah">Khotbah Singkat</div>
+          <div class="cat-choice" data-cat="motivasi">Motivasi Singkat</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Judul</label>
+        <input type="text" id="fTitle" placeholder="Misal: Tenang di Tengah Badai" required maxlength="80">
+      </div>
+      <div class="field" id="verseField">
+        <label>Ayat rujukan (opsional)</label>
+        <input type="text" id="fVerse" placeholder="Misal: Mazmur 46:1" maxlength="60">
+      </div>
+      <div class="field">
+        <label>Isi</label>
+        <textarea id="fBody" placeholder="Tuliskan renungan atau motivasimu secara singkat..." required maxlength="600"></textarea>
+      </div>
+      <div class="field">
+        <label>Nama kamu</label>
+        <input type="text" id="fAuthor" placeholder="Nama atau inisial" required maxlength="40">
+      </div>
+      <button type="submit" class="submit-btn" id="submitBtn">Bagikan sekarang</button>
+      <p class="hint">Tulisan bersifat publik dan dapat dilihat semua pengunjung halaman ini.</p>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast">Berhasil dibagikan ✦</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, doc, updateDoc, increment,
+  onSnapshot, query, orderBy, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBhCmtlpqMVuerL-ibkrJkqMp3P-rn0uXU",
+  authDomain: "sepercik-firman.firebaseapp.com",
+  projectId: "sepercik-firman",
+  storageBucket: "sepercik-firman.firebasestorage.app",
+  messagingSenderId: "1006243636169",
+  appId: "1:1006243636169:web:15671a228b0548f2eafe18",
+  measurementId: "G-YFQEHX5HMB"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const postsCol = collection(db, "posts");
+
+let posts = [];
+let activeCat = 'semua';
+let selectedNewCat = 'firman';
+let favorites = JSON.parse(localStorage.getItem('sf_favorites') || '[]');
+
+const catLabels = { firman: 'Firman', khotbah: 'Khotbah Singkat', motivasi: 'Motivasi Singkat' };
+const feedTitles = { semua: 'Semua bagian', firman: 'Firman', khotbah: 'Khotbah Singkat', motivasi: 'Motivasi Singkat', favorit: 'Tulisan favoritmu' };
+
+const grid = document.getElementById('grid');
+const emptyState = document.getElementById('emptyState');
+const feedTitle = document.getElementById('feedTitle');
+const feedCount = document.getElementById('feedCount');
+const toast = document.getElementById('toast');
+const dailySection = document.getElementById('dailySection');
+
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 2200);
+}
+
+function timeAgo(ts){
+  const diff = Math.floor((Date.now() - ts) / 1000);
+  if(diff < 60) return 'baru saja';
+  if(diff < 3600) return Math.floor(diff/60) + ' menit lalu';
+  if(diff < 86400) return Math.floor(diff/3600) + ' jam lalu';
+  const d = Math.floor(diff/86400);
+  if(d < 30) return d + ' hari lalu';
+  return new Date(ts).toLocaleDateString('id-ID', {day:'numeric', month:'short', year:'numeric'});
+}
+
+function isFavorited(id){
+  return favorites.includes(id);
+}
+
+function toggleFavorite(id){
+  if(favorites.includes(id)){
+    favorites = favorites.filter(f => f !== id);
+  }else{
+    favorites.push(id);
+  }
+  localStorage.setItem('sf_favorites', JSON.stringify(favorites));
+}
+
+function buildShareText(p){
+  let text = `${p.title}\n`;
+  if(p.verse) text += `"${p.verse}"\n`;
+  text += `\n${p.body}\n\n— ${p.author}, Sepercik Firman`;
+  return text;
+}
+
+async function copyShareText(p){
+  const text = buildShareText(p);
+  try{
+    await navigator.clipboard.writeText(text);
+    showToast('Disalin, siap dibagikan ✦');
+  }catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); showToast('Disalin, siap dibagikan ✦'); }
+    catch(err){ showToast('Gagal menyalin teks'); }
+    document.body.removeChild(ta);
+  }
+}
+
+function pickDailyPost(){
+  if(posts.length === 0) return null;
+  const today = new Date();
+  const seed = today.getFullYear() * 372 + (today.getMonth()+1) * 31 + today.getDate();
+  const index = seed % posts.length;
+  return posts[index];
+}
+
+function renderDaily(){
+  const p = pickDailyPost();
+  if(!p){
+    dailySection.style.display = 'none';
+    return;
+  }
+  dailySection.style.display = 'block';
+  document.getElementById('dailyTag').textContent = catLabels[p.cat];
+  document.getElementById('dailyTag').style.background =
+    p.cat === 'khotbah' ? 'var(--dusk)' : p.cat === 'motivasi' ? 'var(--sage)' : 'var(--gold)';
+  document.getElementById('dailyTitle').textContent = p.title;
+  const verseEl = document.getElementById('dailyVerse');
+  if(p.verse){ verseEl.textContent = `"${p.verse}"`; verseEl.style.display = 'block'; }
+  else{ verseEl.style.display = 'none'; }
+  document.getElementById('dailyBody').textContent = p.body;
+  document.getElementById('dailyAuthor').textContent = p.author;
+  document.getElementById('dailyTime').textContent = timeAgo(p.ts);
+
+  const favBtn = document.getElementById('dailyFavBtn');
+  favBtn.classList.toggle('lit', isFavorited(p.id));
+  favBtn.textContent = isFavorited(p.id) ? '🔖 Tersimpan' : '🔖 Simpan';
+  favBtn.onclick = () => {
+    toggleFavorite(p.id);
+    renderDaily();
+    if(activeCat === 'favorit') render();
+    showToast(isFavorited(p.id) ? 'Ditambahkan ke favorit' : 'Dihapus dari favorit');
+  };
+  document.getElementById('dailyShareBtn').onclick = () => copyShareText(p);
+}
+
+function listenPosts(){
+  const q = query(postsCol, orderBy('ts', 'desc'));
+  onSnapshot(q, (snapshot) => {
+    posts = snapshot.docs.map(d => {
+      const data = d.data();
+      return {
+        id: d.id,
+        cat: data.cat,
+        title: data.title,
+        verse: data.verse,
+        body: data.body,
+        author: data.author,
+        ts: data.ts && data.ts.toMillis ? data.ts.toMillis() : Date.now(),
+        amin: data.amin || 0
+      };
+    });
+    render();
+    renderDaily();
+  }, (err) => {
+    console.error('Gagal memuat data', err);
+    grid.innerHTML = '';
+    emptyState.style.display = 'block';
+    emptyState.textContent = 'Gagal memuat data. Periksa koneksi atau pengaturan Firebase.';
+  });
+}
+
+function render(){
+  let filtered;
+  if(activeCat === 'semua') filtered = posts;
+  else if(activeCat === 'favorit') filtered = posts.filter(p => isFavorited(p.id));
+  else filtered = posts.filter(p => p.cat === activeCat);
+
+  feedTitle.textContent = feedTitles[activeCat];
+  feedCount.textContent = filtered.length + (filtered.length === 1 ? ' bagian' : ' bagian');
+  grid.innerHTML = '';
+  if(filtered.length === 0){
+    emptyState.style.display = 'block';
+    emptyState.textContent = activeCat === 'favorit'
+      ? 'Belum ada tulisan yang kamu simpan. Ketuk 🔖 pada tulisan untuk menyimpannya.'
+      : 'Belum ada yang dibagikan di kategori ini. Jadilah yang pertama membagikannya.';
+    return;
+  }
+  emptyState.style.display = 'none';
+  filtered.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card cat-' + p.cat;
+    const favLit = isFavorited(p.id) ? 'lit' : '';
+    card.innerHTML = `
+      <span class="card-tag">${catLabels[p.cat]}</span>
+      <h3>${escapeHtml(p.title)}</h3>
+      ${p.verse ? `<p class="verse">"${escapeHtml(p.verse)}"</p>` : ''}
+      <p class="body-text">${escapeHtml(p.body)}</p>
+      <div class="card-footer">
+        <span><span class="author">${escapeHtml(p.author)}</span> · ${timeAgo(p.ts)}</span>
+        <div class="card-actions">
+          <button class="amin-btn" data-id="${p.id}">✦ Amin <span>${p.amin || 0}</span></button>
+          <button class="fav-btn ${favLit}" data-id="${p.id}" title="Simpan ke favorit">🔖</button>
+          <button class="share-btn" data-id="${p.id}" title="Salin untuk dibagikan">📋</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  grid.querySelectorAll('.amin-btn').forEach(btn => {
+    btn.addEventListener('click', () => handleAmin(btn.dataset.id, btn));
+  });
+  grid.querySelectorAll('.fav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleFavorite(btn.dataset.id);
+      render();
+      renderDaily();
+      showToast(isFavorited(btn.dataset.id) ? 'Ditambahkan ke favorit' : 'Dihapus dari favorit');
+    });
+  });
+  grid.querySelectorAll('.share-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = posts.find(pp => pp.id === btn.dataset.id);
+      if(p) copyShareText(p);
+    });
+  });
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+async function handleAmin(id, btn){
+  btn.classList.add('lit');
+  btn.disabled = true;
+  try{
+    await updateDoc(doc(db, 'posts', id), { amin: increment(1) });
+  }catch(e){
+    console.error('Gagal menambah amin', e);
+  }
+  btn.disabled = false;
+}
+
+document.getElementById('tabs').addEventListener('click', (e) => {
+  const tab = e.target.closest('.tab');
+  if(!tab) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  activeCat = tab.dataset.cat;
+  render();
+});
+
+const overlay = document.getElementById('overlay');
+document.getElementById('openModalBtn').addEventListener('click', () => overlay.classList.add('open'));
+document.getElementById('closeModalBtn').addEventListener('click', () => overlay.classList.remove('open'));
+overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.classList.remove('open'); });
+
+document.getElementById('catChoices').addEventListener('click', (e) => {
+  const choice = e.target.closest('.cat-choice');
+  if(!choice) return;
+  document.querySelectorAll('.cat-choice').forEach(c => c.classList.remove('selected'));
+  choice.classList.add('selected');
+  selectedNewCat = choice.dataset.cat;
+  document.getElementById('verseField').style.display = selectedNewCat === 'firman' ? 'block' : 'none';
+});
+
+document.getElementById('postForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Mengirim...';
+
+  const newPost = {
+    cat: selectedNewCat,
+    title: document.getElementById('fTitle').value.trim(),
+    verse: document.getElementById('fVerse').value.trim(),
+    body: document.getElementById('fBody').value.trim(),
+    author: document.getElementById('fAuthor').value.trim(),
+    ts: serverTimestamp(),
+    amin: 0
+  };
+
+  try{
+    await addDoc(postsCol, newPost);
+    e.target.reset();
+    document.querySelectorAll('.cat-choice').forEach(c => c.classList.remove('selected'));
+    document.querySelector('.cat-choice[data-cat="firman"]').classList.add('selected');
+    selectedNewCat = 'firman';
+    document.getElementById('verseField').style.display = 'block';
+    overlay.classList.remove('open');
+    showToast('Berhasil dibagikan ✦');
+  }catch(err){
+    console.error('Gagal mengirim', err);
+    showToast('Gagal mengirim, coba lagi');
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Bagikan sekarang';
+});
+
+listenPosts();
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

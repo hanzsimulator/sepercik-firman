@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tentang Pembuat · Sepercik Firman</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2740;
+    --navy-deep:#121B30;
+    --paper:#FBF6EC;
+    --paper-dim:#F2EBDC;
+    --ink:#2A2A28;
+    --ink-soft:#6B6558;
+    --gold:#C9974C;
+    --gold-soft:#E4C793;
+    --sage:#6E8B74;
+    --dusk:#5C7A99;
+    --line:#E5DCC6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  html,body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--navy);
+    overflow:hidden;
+    padding:56px 0 100px;
+    text-align:center;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-40%;
+    left:50%;
+    width:900px;
+    height:900px;
+    transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(201,151,76,0.35) 0%, rgba(201,151,76,0.08) 40%, rgba(27,39,64,0) 70%);
+  }
+  .hero-inner{position:relative; z-index:1;}
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#C7CEDD;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:34px;
+  }
+  .back-link:hover{color:var(--paper);}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+
+  /* ---------- PROFILE CARD ---------- */
+  .profile-card{
+    position:relative;
+    z-index:2;
+    margin-top:-64px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:40px 36px 34px;
+    box-shadow:0 20px 50px rgba(27,39,64,0.14);
+    text-align:center;
+  }
+.avatar{
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  margin:0 auto 20px;
+  background:linear-gradient(135deg, var(--gold), var(--dusk));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Lora',serif;
+  font-weight:600;
+  font-size:34px;
+  color:#fff;
+  border:4px solid var(--paper);
+  box-shadow:0 6px 18px rgba(27,39,64,0.18);
+  object-fit: cover; /* tambahkan ini */
+}
+  .profile-card h1{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  .role{
+    font-size:13.5px;
+    color:var(--gold);
+    font-weight:600;
+    letter-spacing:0.03em;
+    margin:0 0 22px;
+  }
+  .bio{
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--ink);
+    max-width:520px;
+    margin:0 auto 26px;
+    text-align:left;
+  }
+  .bio p{margin:0 0 14px;}
+  .bio p:last-child{margin-bottom:0;}
+
+  .divider{
+    border:none;
+    border-top:1px dashed var(--line);
+    margin:26px 0;
+  }
+
+  .values{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    text-align:left;
+    margin-bottom:8px;
+  }
+  @media (max-width:560px){ .values{grid-template-columns:1fr;} }
+  .value-item{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+  }
+  .value-item .v-title{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:14px;
+    margin:0 0 4px;
+    color:var(--navy);
+  }
+  .value-item .v-desc{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin:0;
+  }
+
+  .contact-row{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+  }
+  .contact-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:9px 18px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+    transition:all .15s ease;
+  }
+  .contact-btn:hover{border-color:var(--gold); color:var(--gold); transform:translateY(-1px);}
+
+  .footer-note{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:34px 0 60px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap hero-inner">
+    <a class="back-link" href="index.html">← Kembali ke Sepercik Firman</a>
+    <p class="eyebrow">About The Creator Sepercik Firman</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="profile-card">
+    <!-- Ganti "SF" dengan inisialmu, atau ganti div ini dengan <img> foto profil kalau mau -->
+    <img class="avatar" src="hanz.png" alt="Foto profil">
+
+    <!-- Ganti nama dan peran/tagline di bawah ini -->
+    <h1>Fx Anatariksa Hanggar Nugroho</h1>
+    <p class="role">Pembuat &amp; Pengelola Sepercik Firman</p>
+
+    <!-- Ganti paragraf ini dengan ceritamu sendiri -->
+    <div class="bio">
+      <p>Halo! Sepercik Firman tu lahir dari keinginan sederhana ku: untuk menyediakan ruang kecil di internet tempat siapa saja bisa berbagi ayat, renungan singkat, atau dorongan yang menguatkan — tanpa perlu jadi pengkhotbah atau penulis profesional.</p>
+      <p>Aku si percaya bahwa satu kalimat yang tulus, dibagikan pada waktu yang tepat, bisa jadi terang bagi orang lain yang sedang butuh. Website ini dibuat dan dikelola sendiri sebagai bentuk kecil dari kepedulian itu.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="values">
+      <div class="value-item">
+        <p class="v-title">Terbuka</p>
+        <p class="v-desc">Siapa saja boleh berbagi, tanpa perlu keahlian khusus.</p>
+      </div>
+      <div class="value-item">
+        <p class="v-title">Sederhana</p>
+        <p class="v-desc">Satu ayat, satu renungan singkat, sudah cukup berarti.</p>
+      </div>
+      <div class="value-item">
+        <p class="v-title">Tulus</p>
+        <p class="v-desc">Ruang ini dijaga agar tetap positif dan saling menguatkan.</p>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <!-- Ganti link-link ini dengan kontakmu sendiri, atau hapus yang tidak dipakai -->
+      <a class="contact-btn" href="mailto:hanggar838@gmail.com">✉ Email</a>
+      <a class="contact-btn" href="https://instagram.com/hanzzx168" target="_blank" rel="noopener">📷 Instagram</a>
+      <a class="contact-btn" href="https://wa.me/6281389768412" target="_blank" rel="noopener">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <p class="footer-note">Terima kasih sudah mampir dan menjadi bagian dari Sepercik Firman ✦</p>
+</div>
+
+</body>
+</html>

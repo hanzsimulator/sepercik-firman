@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Sepercik Firman</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2740;
+    --navy-deep:#121B30;
+    --paper:#FBF6EC;
+    --paper-dim:#F2EBDC;
+    --ink:#2A2A28;
+    --ink-soft:#6B6558;
+    --gold:#C9974C;
+    --gold-soft:#E4C793;
+    --sage:#6E8B74;
+    --dusk:#5C7A99;
+    --line:#E5DCC6;
+    --danger:#B44;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  html,body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    background:var(--navy);
+    padding:22px 0;
+  }
+  .topbar-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .brand{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-weight:600;
+    color:var(--paper);
+    font-size:18px;
+  }
+  .brand span{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-style:normal;
+    font-weight:700;
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin-bottom:4px;
+  }
+  .logout-btn{
+    background:none;
+    border:1px solid rgba(255,255,255,0.25);
+    color:var(--paper);
+    border-radius:100px;
+    padding:8px 16px;
+    font-size:12.5px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .logout-btn:hover{background:rgba(255,255,255,0.1);}
+
+  /* ---------- LOGIN SCREEN ---------- */
+  .login-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .login-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:36px 32px;
+    max-width:380px;
+    width:100%;
+    box-shadow:0 20px 50px rgba(27,39,64,0.10);
+    text-align:center;
+  }
+  .login-card .eyebrow{
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:700;
+    margin:0 0 10px;
+  }
+  .login-card h1{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 8px;
+  }
+  .login-card p.sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 24px;
+    line-height:1.5;
+  }
+  .field{margin-bottom:14px; text-align:left;}
+  .field label{
+    display:block;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .field input{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:11px 12px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .field input:focus{outline:2px solid var(--gold-soft); outline-offset:1px;}
+  .login-btn{
+    width:100%;
+    background:var(--navy);
+    color:var(--paper);
+    border:none;
+    border-radius:8px;
+    padding:13px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:4px;
+    transition:filter .15s ease;
+  }
+  .login-btn:hover{filter:brightness(1.15);}
+  .login-error{
+    font-size:12.5px;
+    color:var(--danger);
+    margin:10px 0 0;
+    display:none;
+  }
+  .login-error.show{display:block;}
+  .back-link{
+    display:inline-block;
+    margin-top:20px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  .back-link:hover{color:var(--ink);}
+
+  /* ---------- DASHBOARD ---------- */
+  .dash-hidden{display:none;}
+  .stats-row{
+    display:flex;
+    gap:14px;
+    margin:28px 0 24px;
+    flex-wrap:wrap;
+  }
+  .stat-card{
+    flex:1;
+    min-width:120px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .stat-card .num{
+    font-family:'Lora',serif;
+    font-size:26px;
+    font-weight:600;
+    color:var(--navy);
+  }
+  .stat-card .label{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  .toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .toolbar h2{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:19px;
+    margin:0;
+  }
+  .tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .tab{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:7px 15px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab:hover{color:var(--ink);}
+  .tab.active{background:var(--navy); color:var(--paper); border-color:var(--navy);}
+
+  .search-box{
+    width:100%;
+    max-width:280px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:9px 16px;
+    font-size:13px;
+    font-family:'Inter',sans-serif;
+    background:#fff;
+  }
+
+  .post-list{margin-bottom:80px;}
+  .post-row{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    border-radius:2px 10px 10px 2px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .post-row.cat-khotbah{border-left-color:var(--dusk);}
+  .post-row.cat-motivasi{border-left-color:var(--sage);}
+  .post-main{flex:1; min-width:220px;}
+  .post-tag{
+    display:inline-block;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:3px 9px;
+    border-radius:100px;
+    margin-bottom:8px;
+    color:#fff;
+    background:var(--gold);
+  }
+  .post-row.cat-khotbah .post-tag{background:var(--dusk);}
+  .post-row.cat-motivasi .post-tag{background:var(--sage);}
+  .post-main h3{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:16px;
+    margin:0 0 6px;
+  }
+  .post-main .verse{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+  }
+  .post-main .body-text{
+    font-size:13px;
+    line-height:1.55;
+    color:var(--ink);
+    margin:0 0 10px;
+    white-space:pre-wrap;
+  }
+  .post-meta{
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+  .post-meta .author{font-weight:600; color:var(--ink);}
+  .post-actions{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .amin-count{
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .delete-btn{
+    background:none;
+    border:1px solid #D98C8C;
+    color:var(--danger);
+    border-radius:100px;
+    padding:7px 14px;
+    font-size:12.5px;
+    font-weight:600;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .delete-btn:hover{background:var(--danger); color:#fff;}
+  .delete-btn:disabled{opacity:0.5; cursor:not-allowed;}
+
+  .empty{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+    padding:60px 20px;
+  }
+
+  .toast{
+    position:fixed;
+    bottom:26px; left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--navy);
+    color:var(--paper);
+    padding:12px 20px;
+    border-radius:100px;
+    font-size:13px;
+    font-weight:600;
+    opacity:0;
+    transition:all .25s ease;
+    z-index:200;
+    pointer-events:none;
+    white-space:nowrap;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <p class="eyebrow">Sepercik Firman</p>
+    <h1>Masuk Admin</h1>
+    <p class="sub">Halaman ini untuk mengelola tulisan yang dibagikan di Sepercik Firman.</p>
+    <div class="field">
+      <label>Kata sandi</label>
+      <input type="password" id="adminPassword" placeholder="Kata sandi admin">
+    </div>
+    <p class="login-error" id="loginError">Kata sandi salah. Coba lagi.</p>
+    <button class="login-btn" id="loginBtn">Masuk</button>
+    <a class="back-link" href="index.html">← Kembali ke halaman utama</a>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dash-hidden">
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand"><span>Admin</span>Sepercik Firman</div>
+      <button class="logout-btn" id="logoutBtn">Keluar</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats-row" id="statsRow"></div>
+
+    <div class="toolbar">
+      <h2>Kelola tulisan</h2>
+      <input type="text" class="search-box" id="searchBox" placeholder="Cari judul, isi, atau nama...">
+    </div>
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-cat="semua">Semua</div>
+      <div class="tab" data-cat="firman">Firman</div>
+      <div class="tab" data-cat="khotbah">Khotbah Singkat</div>
+      <div class="tab" data-cat="motivasi">Motivasi Singkat</div>
+    </div>
+
+    <div class="post-list" id="postList"></div>
+    <div class="empty" id="emptyState" style="display:none;">Tidak ada tulisan yang cocok.</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore, collection, deleteDoc, doc,
+  onSnapshot, query, orderBy
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBhCmtlpqMVuerL-ibkrJkqMp3P-rn0uXU",
+  authDomain: "sepercik-firman.firebaseapp.com",
+  projectId: "sepercik-firman",
+  storageBucket: "sepercik-firman.firebasestorage.app",
+  messagingSenderId: "1006243636169",
+  appId: "1:1006243636169:web:15671a228b0548f2eafe18",
+  measurementId: "G-YFQEHX5HMB"
+};
+
+// Ganti kata sandi ini dengan kata sandi rahasiamu sendiri sebelum publikasi.
+const ADMIN_PASSWORD = "antariksa321";
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const postsCol = collection(db, "posts");
+
+const catLabels = { firman: 'Firman', khotbah: 'Khotbah Singkat', motivasi: 'Motivasi Singkat' };
+
+let posts = [];
+let activeCat = 'semua';
+let searchTerm = '';
+
+const loginScreen = document.getElementById('loginScreen');
+const dashboard = document.getElementById('dashboard');
+const adminPasswordInput = document.getElementById('adminPassword');
+const loginError = document.getElementById('loginError');
+const toast = document.getElementById('toast');
+const postList = document.getElementById('postList');
+const emptyState = document.getElementById('emptyState');
+const statsRow = document.getElementById('statsRow');
+
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 2200);
+}
+
+function timeAgo(ts){
+  const diff = Math.floor((Date.now() - ts) / 1000);
+  if(diff < 60) return 'baru saja';
+  if(diff < 3600) return Math.floor(diff/60) + ' menit lalu';
+  if(diff < 86400) return Math.floor(diff/3600) + ' jam lalu';
+  const d = Math.floor(diff/86400);
+  if(d < 30) return d + ' hari lalu';
+  return new Date(ts).toLocaleDateString('id-ID', {day:'numeric', month:'short', year:'numeric'});
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function checkLogin(){
+  if(sessionStorage.getItem('sf_admin') === 'true'){
+    loginScreen.classList.add('dash-hidden');
+    dashboard.classList.remove('dash-hidden');
+    listenPosts();
+  }else{
+    loginScreen.classList.remove('dash-hidden');
+    dashboard.classList.add('dash-hidden');
+  }
+}
+
+document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+adminPasswordInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') attemptLogin(); });
+
+function attemptLogin(){
+  if(adminPasswordInput.value === ADMIN_PASSWORD){
+    sessionStorage.setItem('sf_admin', 'true');
+    loginError.classList.remove('show');
+    checkLogin();
+  }else{
+    loginError.classList.add('show');
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  sessionStorage.removeItem('sf_admin');
+  checkLogin();
+});
+
+let unsubscribe = null;
+function listenPosts(){
+  if(unsubscribe) return;
+  const q = query(postsCol, orderBy('ts', 'desc'));
+  unsubscribe = onSnapshot(q, (snapshot) => {
+    posts = snapshot.docs.map(d => {
+      const data = d.data();
+      return {
+        id: d.id,
+        cat: data.cat,
+        title: data.title,
+        verse: data.verse,
+        body: data.body,
+        author: data.author,
+        ts: data.ts && data.ts.toMillis ? data.ts.toMillis() : Date.now(),
+        amin: data.amin || 0
+      };
+    });
+    renderStats();
+    render();
+  }, (err) => {
+    console.error('Gagal memuat data', err);
+    postList.innerHTML = '';
+    emptyState.style.display = 'block';
+    emptyState.textContent = 'Gagal memuat data. Periksa koneksi atau pengaturan Firebase.';
+  });
+}
+
+function renderStats(){
+  const counts = { firman: 0, khotbah: 0, motivasi: 0 };
+  posts.forEach(p => { if(counts[p.cat] !== undefined) counts[p.cat]++; });
+  statsRow.innerHTML = `
+    <div class="stat-card"><div class="num">${posts.length}</div><div class="label">Total tulisan</div></div>
+    <div class="stat-card"><div class="num">${counts.firman}</div><div class="label">Firman</div></div>
+    <div class="stat-card"><div class="num">${counts.khotbah}</div><div class="label">Khotbah Singkat</div></div>
+    <div class="stat-card"><div class="num">${counts.motivasi}</div><div class="label">Motivasi Singkat</div></div>
+  `;
+}
+
+function render(){
+  let filtered = activeCat === 'semua' ? posts : posts.filter(p => p.cat === activeCat);
+  if(searchTerm.trim()){
+    const t = searchTerm.trim().toLowerCase();
+    filtered = filtered.filter(p =>
+      p.title.toLowerCase().includes(t) ||
+      p.body.toLowerCase().includes(t) ||
+      p.author.toLowerCase().includes(t)
+    );
+  }
+  postList.innerHTML = '';
+  if(filtered.length === 0){
+    emptyState.style.display = 'block';
+    return;
+  }
+  emptyState.style.display = 'none';
+  filtered.forEach(p => {
+    const row = document.createElement('div');
+    row.className = 'post-row cat-' + p.cat;
+    row.innerHTML = `
+      <div class="post-main">
+        <span class="post-tag">${catLabels[p.cat]}</span>
+        <h3>${escapeHtml(p.title)}</h3>
+        ${p.verse ? `<p class="verse">"${escapeHtml(p.verse)}"</p>` : ''}
+        <p class="body-text">${escapeHtml(p.body)}</p>
+        <p class="post-meta"><span class="author">${escapeHtml(p.author)}</span> · ${timeAgo(p.ts)}</p>
+      </div>
+      <div class="post-actions">
+        <span class="amin-count">✦ ${p.amin || 0} Amin</span>
+        <button class="delete-btn" data-id="${p.id}">🗑 Hapus</button>
+      </div>
+    `;
+    postList.appendChild(row);
+  });
+
+  postList.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => handleDelete(btn.dataset.id, btn));
+  });
+}
+
+async function handleDelete(id, btn){
+  const ok = confirm('Yakin ingin menghapus tulisan ini? Tindakan ini tidak bisa dibatalkan.');
+  if(!ok) return;
+  btn.disabled = true;
+  btn.textContent = 'Menghapus...';
+  try{
+    await deleteDoc(doc(db, 'posts', id));
+    showToast('Tulisan dihapus');
+  }catch(e){
+    console.error('Gagal menghapus', e);
+    showToast('Gagal menghapus, coba lagi');
+    btn.disabled = false;
+    btn.textContent = '🗑 Hapus';
+  }
+}
+
+document.getElementById('tabs').addEventListener('click', (e) => {
+  const tab = e.target.closest('.tab');
+  if(!tab) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  activeCat = tab.dataset.cat;
+  render();
+});
+
+document.getElementById('searchBox').addEventListener('input', (e) => {
+  searchTerm = e.target.value;
+  render();
+});
+
+checkLogin();
+</script>
+</body>
+</html>
