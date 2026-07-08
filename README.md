@@ -1,0 +1,1 @@
+# sepercik-firman
